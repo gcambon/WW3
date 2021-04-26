@@ -170,31 +170,31 @@
             RLA_OASIS_SND(:,1) = DBLE(HS(1:NSEAL))
             CALL CPL_OASIS_SND(IB_DO, ID_OASIS_TIME, RLA_OASIS_SND, LL_ACTION)
          ENDIF
-!$$$  GC commented : modif to only exchange the wave dir and not sin(dir) and cos(dir)
-!$$$  the cosinus and sunus are then computed in croco WITH taking into account
-!$$$  the angle of the croco rotated grid
-!$$$         !
-!$$$         ! Cosinus of Mean wave direction (cos(theta) in radians)
-!$$$         ! ---------------------------------------------------------------------
-!$$$         ! dir : oceanographic convention (GRIDDED files) - 0 degree from north, 90 from east 
-!$$$         ! theta : trigonometric convention ( 0 at East, 90 at North)
-!$$$         IF (SND_FLD(IB_DO)%CL_FIELD_NAME == 'WW3_CDIR') THEN
-!$$$            TMP(1:NSEAL) = 0.0
-!$$$            WHERE(THM /= UNDEF) TMP=COS(THM)
-!$$$            RLA_OASIS_SND(:,1) = TMP(1:NSEAL)
-!$$$            CALL CPL_OASIS_SND(IB_DO, ID_OASIS_TIME, RLA_OASIS_SND, LL_ACTION)
-!$$$         ENDIF
-!$$$         !
-!$$$         ! Sinus of Mean wave direction (sin(theta) in radians)
-!$$$         ! ---------------------------------------------------------------------
-!$$$         ! dir : oceanographic convention (GRIDDED files) - 0 degree from north, 90 from east 
-!$$$         ! theta : trigonometric convention ( 0 at East, 90 at North)
-!$$$         IF (SND_FLD(IB_DO)%CL_FIELD_NAME == 'WW3_SDIR') THEN
-!$$$            TMP(1:NSEAL) = 0.0
-!$$$            WHERE(THM /= UNDEF) TMP=SIN(THM)
-!$$$            RLA_OASIS_SND(:,1) = TMP(1:NSEAL)
-!$$$            CALL CPL_OASIS_SND(IB_DO, ID_OASIS_TIME, RLA_OASIS_SND, LL_ACTION)
-!$$$         ENDIF
+         !
+         ! Cosinus of Mean wave direction (cos(theta) in radians)
+         ! ---------------------------------------------------------------------
+         ! dir : oceanographic convention (GRIDDED files) - 0 degree from north, 90 from east 
+         ! theta : trigonometric convention ( 0 at East, 90 at North)
+         IF (SND_FLD(IB_DO)%CL_FIELD_NAME == 'WW3_CDIR') THEN
+            TMP(1:NSEAL) = 0.0
+            WHERE(THM /= UNDEF) TMP=COS(THM)
+            RLA_OASIS_SND(:,1) = TMP(1:NSEAL)
+            CALL CPL_OASIS_SND(IB_DO, ID_OASIS_TIME, RLA_OASIS_SND, LL_ACTION)
+         ENDIF
+         !
+         ! Sinus of Mean wave direction (sin(theta) in radians)
+         ! ---------------------------------------------------------------------
+         ! dir : oceanographic convention (GRIDDED files) - 0 degree from north, 90 from east 
+         ! theta : trigonometric convention ( 0 at East, 90 at North)
+         IF (SND_FLD(IB_DO)%CL_FIELD_NAME == 'WW3_SDIR') THEN
+            TMP(1:NSEAL) = 0.0
+            WHERE(THM /= UNDEF) TMP=SIN(THM)
+            RLA_OASIS_SND(:,1) = TMP(1:NSEAL)
+            CALL CPL_OASIS_SND(IB_DO, ID_OASIS_TIME, RLA_OASIS_SND, LL_ACTION)
+          ENDIF
+!$$$  GC : modif to exchange the wave dir and not only sin(dir) and cos(dir)
+!$$$  the cosinus and sinus are then computed in croco WITH taking into account
+!$$$  the angle of the croco rotated grid         
          !
          ! Mean wave direction theta in radians
          ! ---------------------------------------------------------------------
